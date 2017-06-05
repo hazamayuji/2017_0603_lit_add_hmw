@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //黒の画面を作っておきます
-    ofBackground(col.set_red, col.set_green, col.set_blue);
+    ofBackground(col.getColor());
     
     //値を入力させる処理です
     col.input_number();
@@ -23,7 +23,7 @@ void ofApp::update(){
 void ofApp::draw(){
     
         //複雑な計算過程を経てでた値を代入します
-    ofSetColor(col.set_red, col.set_green, col.set_blue);
+    ofSetColor(col.getColor());
 
     //四角形をかきます
     ofDrawRectangle(0,0,ofGetWidth(),ofGetHeight());
