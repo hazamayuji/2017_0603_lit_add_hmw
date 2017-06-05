@@ -10,44 +10,44 @@
 
 //それぞれの値を初期化しています
 Color::Color(){
-    r = 0;
-    g = 0;
-    b = 0;
-}
-
-//参照渡しを利用しています
-//これを使うことで別の関数に計算した値を簡単に渡せます
-int Color::change_red(int &r_2){
-    r = r_2*2 + 10;
-    return r;
-}
-
-int Color::change_green(int &g_2){
-    g = g_2 + 30;
-    return g;
-}
-
-int Color::change_blue(int &b_2){
-    b = b_2*3 + 20;
-    return b;
+    for(int i = 0; i < 3; i++) c[i] = 0;
 }
 
 //ちゃんと教えてあげる作り手の配慮のコードです
 void Color::say_state(){
     
     cout << "よしさん！！！" << endl;
-    cout << "赤の値は->" << r << "!!" << endl;
-    cout << "緑の値は->" << g << "!!" << endl;
-    cout << "青の値は->" << b << "!!" << endl;
-    
+    cout << "赤の値は->" << c[0] << "!!" << endl;
+    cout << "緑の値は->" << c[1] << "!!" << endl;
+    cout << "青の値は->" << c[2] << "!!" << endl;
     cout << "の色の画面ができました！！！感動してください。"<< endl;
 }
 
+ofColor Color::getColor(){
+    return ofColor(c[0], c[1], c[2]);
+}
 
-//入力してもらう時に呼び出す処理です。
+void Color::change_color(int i){
+    
+    if(i >= 3) return;
+    c[i] = c[i] * cooef[i] + bias[i];
+}
+
 void Color::input_number(){
     
+    for(int i = 0; i < 3; i++){
+        while(c[i] == 0 || c[i] > 255){
+            cout << c_str[i] << "の値を入力してくだい" << endl;
+            cin >>  c[i] ;
+            change_color(i);
+            cout << cooef[i] << "倍して" << bias[i] << "たしておきますね~^" << endl;
+            if(c[i] > 255){
+                cout << "なにしてんの？結果255以上なってるやんやり直しやワレ" << endl;
+            }
+        }
+    }
     
+    /*
         while(r == 0 || r > 255){
         cout << "赤の値を入力してくだい" << endl;
         cin >>  set_red ;
@@ -78,6 +78,23 @@ void Color::input_number(){
             }
         }
 
+     */
 }
 
+//参照渡しを利用しています
+//これを使うことで別の関数に計算した値を簡単に渡せます
+/*
+int Color::change_red(){
+    r = r * 2 + 10;
+    return r;
+}
 
+int Color::change_green(){
+    g = g + 3;
+    return g;
+}
+
+int Color::change_blue(){
+    b = b * 3 + 20;
+    return b;
+}*/
